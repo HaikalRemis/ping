@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ping Playground</title>
+<style>
+    body {
+        margin: 0;
+        background: #0d1117;
+        color: #e6edf3;
+        font-family: "Consolas", monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    .card {
+        background: #161b22;
+        padding: 25px;
+        width: 420px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #0005;
+        text-align: center;
+        border: 1px solid #30363d;
+    }
+
+    input {
+        width: 90%;
+        padding: 12px;
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        color: #e6edf3;
+        font-size: 15px;
+        outline: none;
+        margin-bottom: 15px;
+        transition: 0.2s;
+    }
+
+    input:focus {
+        border-color: #58a6ff;
+        box-shadow: 0 0 8px #58a6ff50;
+    }
+
+    button {
+        padding: 12px 20px;
+        background: #238636;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #2ea043;
+    }
+
+    .console {
+        background: #000;
+        width: 420px;
+        margin-top: 20px;
+        height: 220px;
+        padding: 15px;
+        border-radius: 8px;
+        overflow-y: auto;
+        border: 1px solid #30363d;
+        font-size: 14px;
+        white-space: pre-wrap;
+    }
+
+    .title {
+        font-size: 22px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <div class="title">Ping Playground</div>
+    <input id="ip" type="text" placeholder="Masukkan IP…">
+    <button onclick="runPing()">Ping</button>
+</div>
+
+<div id="console" class="console">> Output akan muncul di sini…</div>
+
+<script>
+    async function runPing() {
+        const ip = document.getElementById("ip").value;
+        const consoleBox = document.getElementById("console");
+
+        consoleBox.textContent = "> Menjalankan ping...\n";
+
+        try {
+            const res = await fetch("https://overrude-sully-makhi.ngrok-free.dev/ping?ip=" + encodeURIComponent(ip));
+            const text = await res.text();
+            consoleBox.textContent = text;
+        } catch (e) {
+            consoleBox.textContent = "> Error: tidak bisa connect ke server.";
+        }
+    }
+</script>
+
+</body>
+</html>
