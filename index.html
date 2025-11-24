@@ -84,10 +84,10 @@
 <div class="card">
     <div class="title">Ping Playground</div>
     <input id="ip" type="text" placeholder="Masukkan IP…">
-    <button onclick="runPing()">Ping</button>
+    <button onclick="runPing()">Execute</button>
 </div>
 
-<div id="console" class="console">> Output akan muncul di sini…</div>
+<div id="console" class="console">output here</div>
 
 <script>
     async function runPing() {
@@ -97,7 +97,7 @@
         consoleBox.textContent = "> Menjalankan ping...\n";
 
         try {
-            const res = await fetch("https://lancaster-beans-knit-pushing.trycloudflare.com/ping?ip=" + encodeURIComponent(ip));
+            const res = await fetch("https://api.ctfskanema.my.id/ping?ip=" + encodeURIComponent(ip));
             const text = await res.text();
             consoleBox.textContent = text;
         } catch (e) {
@@ -108,4 +108,5 @@
 
 </body>
 </html>
+
 
